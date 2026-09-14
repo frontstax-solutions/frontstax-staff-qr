@@ -1,0 +1,163 @@
+:root {
+    --navy: #0b1f3a;
+    --blue: #123e68;
+    --background: #eef2f7;
+    --text: #172033;
+    --muted: #667085;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 15px;
+}
+
+.card {
+    width: 100%;
+    max-width: 450px;
+    background: #ffffff;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 18px 50px rgba(11, 31, 58, 0.15);
+}
+
+.header {
+    background: linear-gradient(135deg, #071b33, #123e68);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.logo {
+    width: 75px;
+    height: 75px;
+    background: white;
+    color: #0b1f3a;
+    border-radius: 18px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.brand {
+    margin-top: 15px;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.name {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.title {
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.content {
+    padding: 25px;
+}
+
+.tagline {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 22px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 46px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid #e2e8f0;
+    color: var(--text);
+}
+
+.button.primary {
+    background: #0b1f3a;
+    color: white;
+}
+
+.button.full {
+    grid-column: 1 / -1;
+}
+
+.info {
+    margin-top: 22px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.info-row {
+    padding: 13px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.value {
+    margin-top: 5px;
+    font-size: 14px;
+    word-break: break-word;
+}
+
+.value a {
+    color: #123e68;
+    text-decoration: none;
+}
+
+.footer {
+    text-align: center;
+    color: #98a2b3;
+    font-size: 12px;
+    padding: 0 20px 25px;
+}
+
+.footer a {
+    color: #123e68;
+}
+
+@media (max-width: 380px) {
+    .buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .button.full {
+        grid-column: auto;
+    }
+}
