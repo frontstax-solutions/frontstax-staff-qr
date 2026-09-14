@@ -1,30 +1,44 @@
 :root {
-    --navy: #0b1f3a;
+    --navy: #0b2f55;
+    --navy-dark: #071f3b;
     --blue: #123e68;
+    --blue-light: #2b6ca3;
     --background: #eef2f7;
-    --text: #172033;
+    --text: #071f3b;
     --muted: #667085;
+    --light-button: #edf2f7;
     --white: #ffffff;
+    --phone: #e83e8c;
 }
 
 * {
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
     font-family: Arial, Helvetica, sans-serif;
     background: var(--background);
     color: var(--text);
 }
+
+/* PAGE */
 
 .container {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 25px 15px;
+    padding: 8px;
 }
+
+/* MAIN CARD */
 
 .card {
     width: 100%;
@@ -32,132 +46,233 @@ body {
     background: #ffffff;
     border-radius: 22px;
     overflow: hidden;
-    box-shadow: 0 18px 50px rgba(11, 31, 58, 0.15);
+    box-shadow: 0 12px 35px rgba(7, 31, 59, 0.18);
 }
+
+/* HEADER */
 
 .header {
-    background: linear-gradient(135deg, #071b33, #123e68);
+    background: linear-gradient(
+        135deg,
+        #071f3b 0%,
+        #123e68 100%
+    );
+
     color: white;
     text-align: center;
-    padding: 30px 20px;
+
+    padding: 20px 20px 19px;
 }
 
-.logo {
-    width: 75px;
-    height: 75px;
-    background: white;
-    color: #0b1f3a;
+/* LOGO */
+
+.logo-box {
+    width: 110px;
+    height: 80px;
+
+    background: #ffffff;
+
     border-radius: 18px;
-    margin: auto;
+
+    margin: 0 auto 20px;
+
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 24px;
-    font-weight: bold;
+    justify-content: center;
+
+    overflow: hidden;
 }
+
+.logo-image {
+    width: 90px;
+    max-height: 65px;
+    object-fit: contain;
+}
+
+/* COMPANY */
 
 .brand {
-    margin-top: 15px;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-}
+    font-size: 29px;
+    font-weight: 700;
+    line-height: 1.15;
 
-.name {
-    font-size: 28px;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.title {
-    font-size: 15px;
-    margin-top: 5px;
-}
-
-.content {
-    padding: 25px;
+    margin-top: 2px;
 }
 
 .tagline {
-    text-align: center;
-    color: var(--muted);
     font-size: 14px;
-    margin-bottom: 22px;
+    font-weight: 400;
+
+    margin-top: 8px;
+
+    color: #e5edf5;
 }
 
-.buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+/* PROFILE */
+
+.profile {
+    text-align: center;
+    padding: 28px 25px 12px;
 }
 
-.button {
+.name {
+    font-size: 29px;
+    font-weight: 700;
+
+    color: #071f3b;
+
+    margin: 0;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+
+    color: #2868a1;
+
+    margin-top: 5px;
+}
+
+/* PHONE */
+
+.phone {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+    font-size: 16px;
+    color: #071f3b;
+}
+
+.phone-icon {
+    color: var(--phone);
+    font-size: 22px;
+}
+
+/* BUTTON AREA */
+
+.actions {
+    padding: 10px 25px 25px;
+}
+
+/* BUTTON */
+
+.button {
+    width: 100%;
+
     min-height: 46px;
-    border-radius: 12px;
+
+    margin-top: 12px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
     text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-    border: 1px solid #e2e8f0;
-    color: var(--text);
+
+    font-size: 16px;
+    font-weight: 700;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+
+    border: none;
+
+    cursor: pointer;
 }
 
-.button.primary {
-    background: #0b1f3a;
-    color: white;
+/* BUTTON ICON */
+
+.button-icon {
+    font-size: 18px;
+    line-height: 1;
 }
 
-.button.full {
-    grid-column: 1 / -1;
+/* PRIMARY */
+
+.button-primary {
+    background: #0b355d;
+    color: #ffffff;
+
+    box-shadow: 0 4px 10px rgba(11, 53, 93, 0.18);
 }
 
-.info {
-    margin-top: 22px;
-    border-top: 1px solid #e5e7eb;
+.button-primary:hover {
+    background: #082b4d;
+    transform: translateY(-1px);
 }
 
-.info-row {
-    padding: 13px 0;
-    border-bottom: 1px solid #e5e7eb;
+/* SECONDARY */
+
+.button-secondary {
+    background: #edf2f7;
+    color: #071f3b;
 }
 
-.label {
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.button-secondary:hover {
+    background: #e2e9f0;
+    transform: translateY(-1px);
 }
 
-.value {
-    margin-top: 5px;
-    font-size: 14px;
-    word-break: break-word;
+/* LINKEDIN */
+
+.button-linkedin {
+    background: #edf2f7;
+    color: #0a66c2;
 }
 
-.value a {
-    color: #123e68;
-    text-decoration: none;
+.button-linkedin:hover {
+    background: #e2e9f0;
+    transform: translateY(-1px);
 }
+
+/* FOOTER */
 
 .footer {
+    border-top: 1px solid #e5e7eb;
+
     text-align: center;
-    color: #98a2b3;
+
+    padding: 20px 15px 16px;
+
+    color: #667085;
+
     font-size: 12px;
-    padding: 0 20px 25px;
 }
 
 .footer a {
     color: #123e68;
+    text-decoration: none;
 }
 
+/* MOBILE */
+
 @media (max-width: 380px) {
-    .buttons {
-        grid-template-columns: 1fr;
+
+    .brand {
+        font-size: 25px;
     }
 
-    .button.full {
-        grid-column: auto;
+    .name {
+        font-size: 26px;
+    }
+
+    .title {
+        font-size: 17px;
+    }
+
+    .actions {
+        padding-left: 18px;
+        padding-right: 18px;
     }
 }
