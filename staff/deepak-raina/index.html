@@ -402,8 +402,8 @@ body {
 
         <a
           class="button secondary"
-          href="#"
-          onclick="saveContact(event);">
+          href="vcard.vcf"
+          onclick="return saveContact(event);">
 
           <i class="fa-solid fa-address-card"></i>
           Save Contact
@@ -452,7 +452,7 @@ body {
 
       <script>
 
-function saveContact(event) {
+async function saveContact(event) {
 
     event.preventDefault();
 
@@ -460,6 +460,7 @@ function saveContact(event) {
 `BEGIN:VCARD
 VERSION:3.0
 FN:Deepak Raina
+N:Raina;Deepak;;;
 ORG:Frontstax Solutions
 TITLE:Founder & CEO
 TEL;TYPE=CELL,VOICE:+971553805362
@@ -469,51 +470,117 @@ ADR;TYPE=WORK:;;;UAE;;;
 NOTE:Founder & CEO | Frontstax Solutions
 END:VCARD`;
 
-    const blob = new Blob(
-        [vcard],
-        { type: "text/vcard;charset=utf-8" }
-    );
+    try {
 
-    const file = new File(
-        [blob],
-        "Deepak-Raina.vcf",
-        { type: "text/vcard" }
-    );
+        /*
+         * Create the vCard file
+         */
 
-    if (
-        navigator.share &&
-        navigator.canShare &&
-        navigator.canShare({ files: [file] })
-    ) {
+        const blob = new Blob(
+            [vcard],
+            { type: "text/vcard;charset=utf-8" }
+        );
 
-        navigator.share({
-            files: [file],
-            title: "Deepak Raina",
-            text: "Frontstax Solutions"
-        }).catch(function(error) {
-            console.log(error);
-        });
+        const file = new File(
+            [blob],
+            "Deepak-Raina.vcf",
+            {
+                type: "text/vcard",
+                lastModified: Date.now()
+            }
+        );
 
-    } else {
+
+        /*
+         * Try native sharing first.
+         * This works on supported Android and iPhone browsers.
+         */
+
+        if (
+            navigator.share &&
+            navigator.canShare
+        ) {
+
+            let shareSupported = false;
+
+            try {
+
+                shareSupported =
+                    navigator.canShare({
+                        files: [file]
+                    });
+
+            } catch (e) {
+
+                shareSupported = false;
+
+            }
+
+
+            if (shareSupported) {
+
+                await navigator.share({
+
+                    files: [file],
+
+                    title: "Deepak Raina",
+
+                    text: "Frontstax Solutions"
+
+                });
+
+                return false;
+            }
+        }
+
+
+        /*
+         * Fallback for browsers that don't support
+         * file sharing.
+         */
 
         const url = URL.createObjectURL(blob);
 
-        const link = document.createElement("a");
+        const downloadLink =
+            document.createElement("a");
 
-        link.href = url;
+        downloadLink.href = url;
 
-        link.download = "Deepak-Raina.vcf";
+        downloadLink.download =
+            "Deepak-Raina.vcf";
 
-        document.body.appendChild(link);
+        downloadLink.style.display = "none";
 
-        link.click();
+        document.body.appendChild(downloadLink);
 
-        document.body.removeChild(link);
+        downloadLink.click();
 
-        setTimeout(function() {
+        document.body.removeChild(downloadLink);
+
+        setTimeout(function () {
+
             URL.revokeObjectURL(url);
-        }, 1000);
+
+        }, 2000);
+
+
+    } catch (error) {
+
+        console.error(
+            "Save Contact Error:",
+            error
+        );
+
+        /*
+         * Final fallback:
+         * use the existing vCard file.
+         */
+
+        window.location.href = "vcard.vcf";
+
     }
+
+    return false;
 }
 
 </script>
