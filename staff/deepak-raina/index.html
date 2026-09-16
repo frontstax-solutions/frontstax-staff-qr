@@ -401,13 +401,14 @@ body {
         <!-- SAVE CONTACT -->
 
         <a
-            class="button secondary"
-            href="vcard.vcf">
+          class="button secondary"
+          href="#"
+          onclick="saveContact(event);">
 
-            <i class="fa-solid fa-address-card"></i>
-            Save Contact
+          <i class="fa-solid fa-address-card"></i>
+          Save Contact
 
-        </a>
+      </a>
 
 
         <!-- EMAIL -->
@@ -449,6 +450,74 @@ body {
 
 </div>
 
+      <script>
+
+function saveContact(event) {
+
+    event.preventDefault();
+
+    const vcard =
+`BEGIN:VCARD
+VERSION:3.0
+FN:Deepak Raina
+ORG:Frontstax Solutions
+TITLE:Founder & CEO
+TEL;TYPE=CELL,VOICE:+971553805362
+TEL;TYPE=CELL,VOICE:+919893664400
+EMAIL;TYPE=INTERNET:deepak.raina@frontstaxsolutions.com
+ADR;TYPE=WORK:;;;UAE;;;
+NOTE:Founder & CEO | Frontstax Solutions
+END:VCARD`;
+
+    const blob = new Blob(
+        [vcard],
+        { type: "text/vcard;charset=utf-8" }
+    );
+
+    const file = new File(
+        [blob],
+        "Deepak-Raina.vcf",
+        { type: "text/vcard" }
+    );
+
+    if (
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({ files: [file] })
+    ) {
+
+        navigator.share({
+            files: [file],
+            title: "Deepak Raina",
+            text: "Frontstax Solutions"
+        }).catch(function(error) {
+            console.log(error);
+        });
+
+    } else {
+
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+
+        link.href = url;
+
+        link.download = "Deepak-Raina.vcf";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+        setTimeout(function() {
+            URL.revokeObjectURL(url);
+        }, 1000);
+    }
+}
+
+</script>
+      
 </body>
 
 </html>
